@@ -1,11 +1,6 @@
 import Carousel from "./../../components/Carousel";
-import useFetch from "./../../hooks/useFetch";
 
-const Recommendation = ({ mediaType, id }) => {
-  const { data, loading } = useFetch(`/${mediaType}/${id}/recommendations`);
-
-  //   const title = mediaType === "movie" ? "Similar Movies" : "Similar TV Shows";
-
+const Recommendation = ({ data, loading, mediaType }) => {
   return (
     <Carousel
       data={data?.results}

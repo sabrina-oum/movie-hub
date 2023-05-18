@@ -13,14 +13,39 @@ const Details = () => {
   const { data: credits, loading: creditsLoading } = useFetch(
     `/${mediaType}/${id}/credits`
   );
+  const { data: similar, loading: similarLoading } = useFetch(
+    `/${mediaType}/${id}/similar`
+  );
+  const { data: recommendations, loading: recommendationsLoading } = useFetch(
+    `/${mediaType}/${id}/recommendations`
+  );
+
+  console.log(data);
 
   return (
     <div>
       <Banner video={data?.results?.[0]} crew={credits?.crew} />
-      <Cast cast={credits?.cast} loading={creditsLoading} />
-      <VideosSection videos={data} loading={loading} />
-      <Similar mediaType={mediaType} id={id} />
-      <Recommendation mediaType={mediaType} id={id} />
+      {credits?.cast?.length > 0 && (
+        <Cast cast={credits?.cast} loading={creditsLoading} />
+      )}
+
+      {data?.results?.length > 0 && (
+        <VideosSection videos={data} loading={loading} />
+      )}
+      {similar?.results?.length > 0 && (
+        <Similar
+          data={similar}
+          loading={similarLoading}
+          mediaType={mediaType}
+        />
+      )}
+      {recommendations?.results?.length > 0 && (
+        <Recommendation
+          data={recommendations}
+          loading={recommendationsLoading}
+          mediaType={mediaType}
+        />
+      )}
     </div>
   );
 };
