@@ -69,9 +69,14 @@ const Header = () => {
     <header className={`header ${mobileMenu ? "header--mobile" : ""} ${show}`}>
       <ContentWrapper>
         <NavLink to="/" className="header__logo">
-          Logo
+          MovieHub
         </NavLink>
         <ul className="header__menu">
+          <li className="header__item">
+            <NavLink to="/" className="header__link">
+              Home
+            </NavLink>
+          </li>
           <li className="header__item">
             <NavLink to="/explore/movie" className="header__link">
               Movies
