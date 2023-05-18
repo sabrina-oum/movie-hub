@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
@@ -68,24 +68,24 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "header--mobile" : ""} ${show}`}>
       <ContentWrapper>
-        <NavLink to="/" className="header__logo">
+        <Link to="/" className="header__logo">
           MovieHub
-        </NavLink>
+        </Link>
         <ul className="header__menu">
           <li className="header__item">
-            <NavLink to="/" className="header__link">
+            <Link to="/" className="header__link">
               Home
-            </NavLink>
+            </Link>
           </li>
           <li className="header__item">
-            <NavLink to="/explore/movie" className="header__link">
+            <Link to="/explore/movie" className="header__link">
               Movies
-            </NavLink>
+            </Link>
           </li>
           <li className="header__item">
-            <NavLink to="/explore/tv" className="header__link">
+            <Link to="/explore/tv" className="header__link">
               TV Shows
-            </NavLink>
+            </Link>
           </li>
           <li className="header__item">
             <HiOutlineSearch onClick={openSearchHandler} />
