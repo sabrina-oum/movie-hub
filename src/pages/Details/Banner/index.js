@@ -67,16 +67,18 @@ const Banner = ({ video, crew }) => {
 
                 <div className="row">
                   <CircleRating rating={data.vote_average.toFixed(1)} />
-                  <div
-                    className="playbtn"
-                    onClick={() => {
-                      setShow(true);
-                      setVideoId(video.key);
-                    }}
-                  >
-                    <PlayButton />
-                    <span className="text">Watch Trailer</span>
-                  </div>
+                  {video && (
+                    <div
+                      className="playbtn"
+                      onClick={() => {
+                        setShow(true);
+                        setVideoId(video.key);
+                      }}
+                    >
+                      <PlayButton />
+                      <span className="text">Watch Trailer</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="banner__overview">
