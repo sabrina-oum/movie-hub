@@ -47,7 +47,7 @@
         }
     }
     
-    .circleRating {
+    .circle-rating {
         width: 40px;
         height: 40px;
         position: relative;
@@ -77,21 +77,22 @@
         display: flex;
         flex-direction: column;
 
-        .title {
-            font-size: 16px;
-            margin-bottom: 10px;
-            line-height: 24px;
-            @include ellipsis(1);
-        
-            @include breakpoint(md) {
-                font-size: 20px;
-            }
+    }
+    
+    &__title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 24px;
+        @include ellipsis(1);
+    
+        @include breakpoint(md) {
+            font-size: 20px;
         }
+    }
 
-        .date {
-            font-size: 14px;
-            opacity: 0.5;
-        }
+    &__date {
+        font-size: 14px;
+        opacity: 0.5;
     }
 
     &:hover {

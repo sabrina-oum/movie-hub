@@ -1,8 +1,6 @@
 import { useRef } from "react";
-import {
-  BsFillArrowLeftCircleFill,
-  BsFillArrowRightCircleFill,
-} from "react-icons/bs";
+
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import ContentWrapper from "../ContentWrapper";
 import CarouselItem from "../CarouselItem";
@@ -49,14 +47,18 @@ const Carousel = ({ data, loading, endPoint, title }) => {
     <div className="carousel">
       <ContentWrapper>
         {title && <h2 className="carousel__title">{title}</h2>}
-        <BsFillArrowLeftCircleFill
-          className="carousel__arrow carousel__left-nav"
-          onClick={navigation.bind(null, "left")}
-        />
-        <BsFillArrowRightCircleFill
-          className="carousel__arrow carousel__right-nav"
-          onClick={navigation.bind(null, "right")}
-        />
+        <div className="carousel__nav carousel__nav-left">
+          <FaChevronLeft
+            className="carousel__arrow"
+            onClick={navigation.bind(null, "left")}
+          />
+        </div>
+        <div className="carousel__nav carousel__nav-right">
+          <FaChevronRight
+            className="carousel__arrow "
+            onClick={navigation.bind(null, "right")}
+          />
+        </div>
         {!loading && (
           <div className="carousel__items" ref={carouselContainerRef}>
             {data?.map((item) => (
