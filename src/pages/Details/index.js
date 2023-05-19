@@ -20,8 +20,6 @@ const Details = () => {
     `/${mediaType}/${id}/recommendations`
   );
 
-  console.log(data);
-
   return (
     <div>
       <Banner video={data?.results?.[0]} crew={credits?.crew} />
