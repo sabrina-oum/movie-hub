@@ -181,19 +181,19 @@
 
         &:hover {
             .text {
-                color: var(--pink);
+                color: var(--color-primary-light);
             }
 
             .triangle {
                 stroke-dashoffset: 0;
                 opacity: 1;
-                stroke: var(--pink);
+                stroke: var(--color-primary-light);
                 animation: trailorPlay 0.7s ease-in-out;
             }
 
             .circle {
                 stroke-dashoffset: 0;
-                stroke: var(--pink);
+                stroke: var(--color-primary-light);
             }
         }
     }

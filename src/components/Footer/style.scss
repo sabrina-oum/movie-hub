@@ -36,7 +36,7 @@
             font-size: 1rem;
         }
         &:hover {
-            color: var(--pink);
+            color: var(--color-primary);
         }
     }
 
@@ -72,8 +72,8 @@
             transition: all ease 0.3s;
 
             &:hover {
-                box-shadow: 0 0 0.625em var(--pink);
-                color: var(--pink);
+                box-shadow: 0 0 0.625em var(--color-primary-light);
+                color: var(--color-primary-light);
             }
         }
     }
