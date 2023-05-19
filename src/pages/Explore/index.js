@@ -115,6 +115,9 @@ const Explore = () => {
               placeholder="Select genres"
               className="react-select-container genresDD"
               classNamePrefix="react-select"
+              classNames={{
+                menuList: () => "react-select-custom",
+              }}
             />
             <Select
               name="sortby"
@@ -125,6 +128,9 @@ const Explore = () => {
               placeholder="Sort by"
               className="react-select-container sortbyDD"
               classNamePrefix="react-select"
+              classNames={{
+                menuList: () => "react-select-custom",
+              }}
             />
           </div>
         </div>
