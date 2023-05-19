@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -7,10 +7,33 @@ import CarouselItem from "../CarouselItem";
 import "./style.scss";
 
 const Carousel = ({ data, loading, endPoint, title }) => {
+  const [index, setIndex] = useState(0);
+  const [start, setStart] = useState(true);
+  const [end, setEnd] = useState(false);
   const carouselContainerRef = useRef();
 
   const navigation = (dir) => {
     const container = carouselContainerRef.current;
+
+    const totalIndex = Math.round(
+      container.scrollWidth / container.offsetWidth
+    );
+
+    if (dir === "right") {
+      if (index + 1 === totalIndex - 1) {
+        setEnd(true);
+      }
+      setStart(false);
+      setIndex((prev) => prev + 1);
+    }
+
+    if (dir === "left") {
+      if (index - 1 === 0) {
+        setStart(true);
+      }
+      setEnd(false);
+      setIndex((prev) => prev - 1);
+    }
 
     if (
       (container.scrollLeft -
@@ -47,18 +70,22 @@ const Carousel = ({ data, loading, endPoint, title }) => {
     <div className="carousel">
       <ContentWrapper>
         {title && <h2 className="carousel__title">{title}</h2>}
-        <div className="carousel__nav carousel__nav-left">
-          <FaChevronLeft
-            className="carousel__arrow"
-            onClick={navigation.bind(null, "left")}
-          />
-        </div>
-        <div className="carousel__nav carousel__nav-right">
-          <FaChevronRight
-            className="carousel__arrow "
-            onClick={navigation.bind(null, "right")}
-          />
-        </div>
+        {!start && (
+          <div className="carousel__nav carousel__nav-left">
+            <FaChevronLeft
+              className="carousel__arrow"
+              onClick={navigation.bind(null, "left")}
+            />
+          </div>
+        )}
+        {!end && (
+          <div className="carousel__nav carousel__nav-right">
+            <FaChevronRight
+              className="carousel__arrow "
+              onClick={navigation.bind(null, "right")}
+            />
+          </div>
+        )}
         {!loading && (
           <div className="carousel__items" ref={carouselContainerRef}>
             {data?.map((item) => (

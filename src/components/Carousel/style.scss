@@ -3,7 +3,7 @@
 .carousel {
     & {
         margin-bottom: 50px;
-        
+
         .contentWrapper {
             position: relative;
         }
@@ -17,17 +17,17 @@
     }
 
     &__nav {
-        background: black;
-        width: 2.75rem;
-        height: 2.75rem;
-        border-radius: 50%;
-        position: absolute;
-        top: 44%;
-        transform: translateY(-50%);
-        z-index: 1;
-        cursor: pointer;
-        display: none;
-    
+background: black;
+width: 2.75rem;
+height: 2.75rem;
+border-radius: 50%;
+position: absolute;
+top: 44%;
+transform: translateY(-50%);
+z-index: 1;
+cursor: pointer;
+display: none;
+
         @include breakpoint(md) {
             display: flex;
             align-items: center;
@@ -38,7 +38,7 @@
     &__nav-right {
         right: 30px;
     }
-    
+
     &__nav-left {
         left: 30px;
     }
@@ -64,7 +64,7 @@
         }
 
     }
-    
+
     .loading-shimmer {
         display: flex;
         gap: 10px;
@@ -72,7 +72,7 @@
         margin-right: -20px;
         margin-left: -20px;
         padding: 0 20px;
-    
+
         @include breakpoint(md) {
             gap: 20px;
             overflow: hidden;
@@ -80,31 +80,31 @@
             padding: 0;
         }
     }
-    
+
     .shimmer-item {
         width: 125px;
         flex-shrink: 0;
-    
+
         @include breakpoint(md) {
             width: calc(25% - 15px);
         }
         @include breakpoint(lg) {
             width: calc(20% - 16px);
         }
-    
+
         &__poster-block {
             border-radius: 12px;
             width: 100%;
             aspect-ratio: 1 / 1.5;
             margin-bottom: 30px;
         }
-    
+
         &__text-block {
             display: flex;
             flex-direction: column;
-    
+
         }
-        
+
         .title {
             width: 100%;
             height: 20px;
@@ -117,3 +117,80 @@
         }
     }
 }
+
+
+
+// @import "../../mixins.scss";
+
+// :root {
+//     --carousel-padding: 4rem;
+// }
+
+// .carousel {
+//     $carousel-gap: 0.75rem;
+
+//     & {
+//         display: flex;
+//         justify-content: center;
+//         overflow-x: hidden;
+//     }
+
+//     &__container {
+//         --items-per-screen: 5;
+//         --slider-index: 0;
+
+//         display: flex;
+//         transform: translateX(-00%);
+//         width: calc(100% - var(--carousel-padding) * 2);
+//     }
+
+//     &__item {
+//         flex: 0 0 calc(100% / var(--items-per-screen));
+//         max-width: calc(100% / var(--items-per-screen));
+//         padding: $carousel-gap;
+//     }
+
+//     &__nav {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         flex-grow: 0;
+//         width: var(--carousel-padding);
+//         z-index: 10;
+//         margin: $carousel-gap 0;
+//         // background-color: red;
+//     }
+
+//     &__nav-left {
+//         // margin-right: $carousel-gap;
+//     }
+
+//     &__nav-right {
+//         // margin-left: $carousel-gap;
+//     }
+
+//     &__nav-icon-box {
+//         background: black;
+//         width: 2.75rem;
+//         height: 2.75rem;
+//         margin-bottom: 4rem;
+//         border-radius: 50%;
+//         cursor: pointer;
+//         display: none;
+
+//         @include breakpoint(md) {
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//         }
+//     }
+
+//     &__nav-icon {
+//         font-size: 1.25rem;
+//         color: white;
+//     }
+// }
+
+// .carousel-item {
+//     width: 100%;
+// }
