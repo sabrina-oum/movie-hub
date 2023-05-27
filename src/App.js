@@ -7,7 +7,7 @@ import Details from "./pages/Details";
 import Explore from "./pages/Explore";
 import PageNotFound from "./pages/PageNotFound";
 import SearchResults from "./pages/SearchResults";
-import Signup from "./pages/Auth/Signup";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import RootLayout from "./pages/Root";
 import { useDispatch } from "react-redux";

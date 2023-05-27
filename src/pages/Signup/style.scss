@@ -1,0 +1,25 @@
+.auth {
+    & {
+        padding: 5rem 0;
+    }
+
+    &__title {
+        margin-bottom: 2rem;
+    }
+
+    &__card {
+        width: 30rem;
+        margin: 0 auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 3rem;
+        border-radius: 8px;
+    }
+
+    &__switch {
+        margin-top: 1rem;
+    }
+
+    .alert {
+        margin-bottom: 1rem;
+    }
+}
