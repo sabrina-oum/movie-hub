@@ -50,7 +50,7 @@ const Carousel = ({ data, loading, endPoint, title }) => {
 
     container.scrollTo({
       left: scrollAmount,
-      behavior: "instant",
+      behavior: "smooth",
     });
   };
 
