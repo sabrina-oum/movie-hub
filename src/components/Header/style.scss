@@ -2,11 +2,10 @@
 
 .header {
     & {
-
         position: fixed;
         transform: translateY(0);
         width: 100%;
-        height: 60px;
+        height: 3.75rem;
         z-index: 1;
         display: flex;
         align-items: center;
@@ -89,6 +88,15 @@
         }
     }
 
+    &__search-bar {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        animation: mobileMenu 0.3s ease forwards;
+    }
+
     &--mobile {
         background: var(--black3);
 
@@ -120,15 +128,6 @@
                 display: none;
             }
         }
-    }
-
-    &__search-bar {
-        position: absolute;
-        top: 60px;
-        width: 100%;
-        height: 60px;
-        background-color: white;
-        animation: mobileMenu 0.3s ease forwards;
     }
 
     .search-input {

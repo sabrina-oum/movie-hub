@@ -4,8 +4,9 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 
-import ContentWrapper from "../ContentWrapper";
 import "./style.scss";
+import ContentWrapper from "../ContentWrapper";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -13,6 +14,9 @@ const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
+
+  const { currentUser, logout } = useAuthContext();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -65,40 +69,58 @@ const Header = () => {
     setShowSearch(false);
   };
 
+  const logoutHandler = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (err) {
+      console.log("Couldn't logout" + err);
+    }
+  };
+
   return (
     <header className={`header ${mobileMenu ? "header--mobile" : ""} ${show}`}>
       <ContentWrapper>
         <Link to="/" className="header__logo">
           MovieHub
         </Link>
-        <ul className="header__menu">
-          <li className="header__item">
-            <Link to="/" className="header__link">
-              Home
-            </Link>
-          </li>
-          <li className="header__item">
-            <Link to="/explore/movie" className="header__link">
-              Movies
-            </Link>
-          </li>
-          <li className="header__item">
-            <Link to="/explore/tv" className="header__link">
-              TV Shows
-            </Link>
-          </li>
-          <li className="header__item">
-            <HiOutlineSearch onClick={openSearchHandler} />
-          </li>
-        </ul>
-        <div className="header__mobile-menu">
-          <HiOutlineSearch onClick={openSearchHandler} />
-          {mobileMenu ? (
-            <VscChromeClose onClick={closeMobileMenuHandler} />
-          ) : (
-            <SlMenu onClick={openMobileMenuHandler} />
-          )}
-        </div>
+        {currentUser && (
+          <>
+            <ul className="header__menu">
+              <li className="header__item">
+                <Link to="/" className="header__link">
+                  Home
+                </Link>
+              </li>
+              <li className="header__item">
+                <Link to="/explore/movie" className="header__link">
+                  Movies
+                </Link>
+              </li>
+              <li className="header__item">
+                <Link to="/explore/tv" className="header__link">
+                  TV Shows
+                </Link>
+              </li>
+              <li className="header__item">
+                <HiOutlineSearch onClick={openSearchHandler} />
+              </li>
+              <li className="header__item">
+                <Link onClick={logoutHandler} className="header__link">
+                  Logout
+                </Link>
+              </li>
+            </ul>
+            <div className="header__mobile-menu">
+              <HiOutlineSearch onClick={openSearchHandler} />
+              {mobileMenu ? (
+                <VscChromeClose onClick={closeMobileMenuHandler} />
+              ) : (
+                <SlMenu onClick={openMobileMenuHandler} />
+              )}
+            </div>
+          </>
+        )}
       </ContentWrapper>
       {showSearch && (
         <div className="header__search-bar">
