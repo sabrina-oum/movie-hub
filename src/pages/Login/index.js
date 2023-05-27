@@ -21,6 +21,11 @@ const Auth = () => {
   const sumbitHandler = async (e) => {
     e.preventDefault();
 
+    if (email.trim() === "" || password === "") {
+      setError("Please enter an email and password");
+      return;
+    }
+
     try {
       setError("");
       setLoading(true);
@@ -28,7 +33,16 @@ const Auth = () => {
       setLoading(false);
       navigate("/");
     } catch (err) {
-      setError("Failed to signin");
+      switch (err.code) {
+        case "auth/wrong-password":
+          setError("The entered password is incorrect");
+          break;
+        case "auth/user-not-found":
+          setError("This user doesn't exist");
+          break;
+        default:
+          setError("Failed to signup");
+      }
       setLoading(false);
     }
   };

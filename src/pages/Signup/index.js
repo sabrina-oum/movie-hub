@@ -23,6 +23,11 @@ const Auth = () => {
   const sumbitHandler = async (e) => {
     e.preventDefault();
 
+    if (email.trim() === "" || password === "") {
+      setError("Please enter an email and password");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("The entered passwords have to be similar");
       return;
