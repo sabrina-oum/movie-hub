@@ -35,7 +35,16 @@ const Auth = () => {
       setLoading(false);
       navigate("/");
     } catch (err) {
-      setError("Failed to signup");
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          setError("An account with this email exists already");
+          break;
+        case "auth/weak-password":
+          setError("Password should be at least 6 characters");
+          break;
+        default:
+          setError("Failed to signup");
+      }
       setLoading(false);
     }
   };
