@@ -1,6 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useCallback, useEffect } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { fetchDataFromApi } from "./utils/api";
+import { onAuthStateChanged } from "firebase/auth";
 
 import Home from "./pages/Home";
 import Details from "./pages/Details";
@@ -10,10 +12,10 @@ import SearchResults from "./pages/SearchResults";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import RootLayout from "./pages/Root";
-import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "./store/homeSlice";
-import AuthContextProvider from "./context/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { signup } from "./store/authSlice";
+import { auth } from "./firebase.config";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -72,11 +74,18 @@ const App = () => {
     genresCall();
   }, [fetchApiConfig, genresCall]);
 
-  return (
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
-  );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const currentUser = JSON.stringify(user);
+        dispatch(signup({ currentUser }));
+      }
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;

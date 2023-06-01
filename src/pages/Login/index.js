@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { useAuthContext } from "../../context/AuthContext";
+import { auth } from "./../../firebase.config";
 
 const Auth = () => {
-  const { currentUser, login } = useAuthContext();
+  const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const Auth = () => {
     try {
       setError("");
       setLoading(true);
-      await login(email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
       navigate("/");
     } catch (err) {

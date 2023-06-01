@@ -1,8 +1,8 @@
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
 
 const ProtectedRoutes = () => {
-  const { currentUser } = useAuthContext();
+  const { currentUser } = useSelector((state) => state.auth);
 
   if (!currentUser) {
     return <Navigate to="/login"></Navigate>;

@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import { auth } from "./../../firebase.config";
 
 import "./style.scss";
-import { useAuthContext } from "../../context/AuthContext";
 
 const Auth = () => {
-  const { currentUser, signup } = useAuthContext();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState("idle");
+
+  const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,12 +22,6 @@ const Auth = () => {
       navigate("/");
     }
   }, [currentUser, navigate]);
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const sumbitHandler = async (e) => {
     e.preventDefault();
@@ -35,9 +38,8 @@ const Auth = () => {
 
     try {
       setError("");
-      setLoading(true);
-      await signup(email, password);
-      setLoading(false);
+      setLoading("pending");
+      await createUserWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (err) {
       switch (err.code) {
@@ -48,9 +50,11 @@ const Auth = () => {
           setError("Password should be at least 6 characters");
           break;
         default:
+          console.log(err);
           setError("Failed to signup");
       }
-      setLoading(false);
+    } finally {
+      setLoading("idle");
     }
   };
 
@@ -87,7 +91,11 @@ const Auth = () => {
               className="form-control"
             />
           </div>
-          <button disabled={loading} className="btn btn--primary" type="submit">
+          <button
+            disabled={loading !== "idle"}
+            className="btn btn--primary"
+            type="submit"
+          >
             Create Account
           </button>
         </form>

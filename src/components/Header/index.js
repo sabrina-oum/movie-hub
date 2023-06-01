@@ -3,10 +3,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
+import { signOut } from "firebase/auth";
+
+import { auth } from "./../../firebase.config";
 
 import "./style.scss";
 import ContentWrapper from "../ContentWrapper";
-import { useAuthContext } from "../../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/authSlice";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -15,10 +19,10 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
 
-  const { currentUser, logout } = useAuthContext();
-
+  const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -71,10 +75,11 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      await logout();
+      await signOut(auth);
+      dispatch(logout());
       navigate("/login");
     } catch (err) {
-      console.log("Couldn't logout" + err);
+      console.log("Couldn't logout " + err);
     }
   };
 
